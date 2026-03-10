@@ -1,73 +1,220 @@
+# 🔐 Password Generator (Python)
 
-🎉 Generador de Contraseñas con Interfaz Gráfica 🎉
-¡Bienvenido al Generador de Contraseñas! Este proyecto te permite generar contraseñas seguras con varias opciones de personalización a través de una interfaz gráfica amigable desarrollada con Tkinter. 🔐
+Generador de contraseñas seguro desarrollado en **Python** con **interfaz gráfica en Tkinter**.
+El proyecto está diseñado con una **arquitectura modular**, separando la interfaz, la lógica de generación, los servicios y el almacenamiento.
 
+El objetivo del proyecto es evolucionar desde un simple generador hacia una **herramienta profesional de generación y análisis de contraseñas**, incorporando prácticas reales de desarrollo como separación de responsabilidades, seguridad criptográfica y extensibilidad.
 
-🚀 Características
-Generación de contraseñas a medida:
+---
 
-🔡 Solo minúsculas.
-🔠 Solo mayúsculas.
-🔢 Solo números.
-📄 Basada en un texto de referencia.
-🔡🔠 Combinación de letras mayúsculas y minúsculas.
-🔣 Mezcla personalizada de letras, números y símbolos.
-🔀 Mezcla de todos los caracteres posibles.
-📝 Generación de contraseñas a partir de un texto proporcionado por el usuario.
-Funcionalidad avanzada:
+# ✨ Características actuales
 
-💾 Guardar la contraseña generada en un archivo de texto (contraseñas.txt).
-🔄 Opción para regenerar una nueva contraseña con un solo clic.
-🧹 Limpiar los campos automáticamente para una nueva generación.
-🛠️ Requisitos
-Python 3.x (descárgalo desde python.org)
-Tkinter (incluido con Python por defecto)
-🗂️ Estructura del Proyecto
-bash
-Copiar código
+### 🔑 Generación segura de contraseñas
+
+* Generación criptográficamente segura usando `secrets`
+* Configuración de longitud de contraseña
+* Selección de tipos de caracteres:
+
+  * 🔡 Letras minúsculas
+  * 🔠 Letras mayúsculas
+  * 🔢 Números
+  * 🔣 Símbolos especiales
+
+### 🖥️ Interfaz gráfica
+
+Interfaz simple desarrollada con **Tkinter** que permite:
+
+* Configurar parámetros de generación
+* Generar contraseñas con un solo clic
+* Visualizar la contraseña generada
+
+### 💾 Persistencia
+
+* Guardado opcional de contraseñas generadas
+* Registro automático con **fecha y hora**
+* Almacenamiento en:
+
+```
+data/passwords.txt
+```
+
+---
+
+# 🏗️ Arquitectura del proyecto
+
+El proyecto sigue una estructura modular que separa responsabilidades.
+
+```
 password_generator/
 │
-├── password_generator.py   # Lógica de generación de contraseñas
-├── main.py                 # Interfaz gráfica de usuario con Tkinter
-└── README.md               # Documentación del proyecto
-📦 Instalación
-Clona el repositorio en tu máquina local:
+├── core/
+│   └── generator.py
+│       # Lógica criptográfica de generación
+│
+├── services/
+│   └── password_service.py
+│       # Lógica de negocio para crear contraseñas
+│
+├── storage/
+│   └── file_storage.py
+│       # Gestión del almacenamiento en archivos
+│
+├── ui/
+│   └── gui.py
+│       # Interfaz gráfica con Tkinter
+│
+├── data/
+│   └── passwords.txt
+│
+├── venv/ # Entorno virtual 
+├── main.py
+│   # Punto de entrada de la aplicación
+│
+└── README.md
+```
 
-bash
-Copiar código
-git clone https://github.com/EricJoel-code/generador_contrasenas.git
-Navega hasta el directorio del proyecto:
+### Separación de responsabilidades
 
-bash
-Copiar código
-cd generador-contrasenas
-Asegúrate de tener Python 3.x instalado. Si no lo tienes, descárgalo desde python.org.
+| Módulo   | Responsabilidad                         |
+| -------- | --------------------------------------- |
+| core     | generación criptográfica de contraseñas |
+| services | reglas de negocio                       |
+| storage  | persistencia de datos                   |
+| ui       | interfaz gráfica                        |
+| main     | inicialización de la aplicación         |
 
-💻 Uso
-Ejecuta el archivo main.py para iniciar la interfaz gráfica:
+Esta arquitectura facilita:
 
-bash
-Copiar código
+* mantenimiento
+* escalabilidad
+* pruebas unitarias
+* futuras extensiones del sistema
+
+---
+
+# ⚙️ Requisitos
+
+* Python **3.10+**
+* Tkinter (incluido en la mayoría de instalaciones de Python)
+
+---
+
+# 📦 Instalación
+
+Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/password-generator.git
+```
+
+Entra al proyecto:
+
+```bash
+cd password-generator
+```
+
+Crear entorno virtual (recomendado):
+
+```bash
+python -m venv venv
+```
+
+Activar entorno virtual:
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux / Mac:
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+# ▶️ Ejecutar la aplicación
+
+```bash
 python main.py
-En la ventana de la aplicación, selecciona el tipo de contraseña que deseas generar:
+```
 
-Puedes elegir entre letras minúsculas, mayúsculas, números, o una combinación.
-Si eliges "Con referencia", proporciona un texto que servirá como base de la contraseña.
-Ingresa la longitud de la contraseña y presiona el botón Generar.
+Se abrirá la interfaz gráfica del generador de contraseñas.
 
-La contraseña aparecerá en pantalla y tendrás la opción de guardar la contraseña generada en un archivo de texto (contraseñas.txt).
+---
 
-Si deseas crear otra contraseña, haz clic en Generar otra contraseña para limpiar los campos y reiniciar el proceso.
+# 🧪 Ejemplo de contraseña generada
 
-📝 Ejemplo de Uso
-Imagina que quieres generar una contraseña basada en el texto de referencia "HolaMundo" con una combinación de letras y números. Así es como podría verse:
+```
+nT8@Pq2!kLm3
+```
 
-text
-Copiar código
-La contraseña generada es: H0laMund0!#
-🌟 Personalización
-Este generador es completamente personalizable. Si deseas cambiar las reglas de generación, simplemente edita el archivo password_generator.py. Por ejemplo, puedes ajustar las reglas de sustitución de caracteres para las referencias en la función transformar_texto_a_contraseña.
+---
 
-🤝 Contribuciones
-¡Contribuciones, ideas y mejoras son siempre bienvenidas! Si encuentras un error o tienes una sugerencia, abre un issue o envía un pull request.
+# 🛣️ Roadmap (mejoras futuras)
 
+El proyecto continuará evolucionando hacia una herramienta más completa.
+
+### Seguridad
+
+* [ ] Cálculo de **entropía de contraseña**
+* [ ] Indicador de seguridad (débil / media / fuerte)
+* [ ] Validación contra contraseñas débiles
+* [ ] Generación tipo **passphrase (Diceware)**
+
+### Funcionalidades
+
+* [ ] Botón **copiar al portapapeles**
+* [ ] Historial de contraseñas generadas
+* [ ] Guardado por **servicio (gmail, github, etc.)**
+* [ ] Exportación segura
+
+### Seguridad avanzada
+
+* [ ] Cifrado de almacenamiento con **AES**
+* [ ] Protección con contraseña maestra
+* [ ] Gestión básica de contraseñas
+
+### Desarrollo
+
+* [ ] Pruebas unitarias con **pytest**
+* [ ] Empaquetado como **paquete Python**
+* [ ] Versión CLI (terminal)
+* [ ] Generación de ejecutable con **PyInstaller**
+
+### Versión futura
+
+* [ ] API REST
+* [ ] Aplicación web (Django / FastAPI)
+* [ ] Dashboard de análisis de contraseñas
+
+---
+
+# 🎯 Objetivo del proyecto
+
+Este proyecto forma parte de un proceso de aprendizaje enfocado en:
+
+* desarrollo backend con Python
+* diseño de software modular
+* seguridad informática aplicada
+* construcción de herramientas reales
+
+---
+
+# 🤝 Contribuciones
+
+Las contribuciones, sugerencias y mejoras son bienvenidas.
+
+Puedes:
+
+* abrir un **issue**
+* proponer una mejora
+* enviar un **pull request**
+
+---
+
+# 📄 Licencia
+
+Este proyecto está disponible bajo la licencia **MIT**.
