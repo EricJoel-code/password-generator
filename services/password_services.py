@@ -1,4 +1,5 @@
 from core.generator import PasswordGenerator
+from security.entropy import PasswordEntropy
 
 
 class PasswordService:
@@ -11,4 +12,8 @@ class PasswordService:
 
         password = PasswordGenerator.generate(lenght, charset)
 
-        return password
+        entropy = PasswordEntropy.calculate_entropy(password)
+
+        strength = PasswordEntropy.strength_label(entropy)
+
+        return {"password": password, "entropy": entropy, "strength": strength}

@@ -14,7 +14,7 @@ def generar():
 
         length = int(length_entry.get())
 
-        password = service.create_password(
+        result = service.create_password(
             length,
             lowercase_var.get(),
             uppercase_var.get(),
@@ -22,7 +22,15 @@ def generar():
             symbols_var.get(),
         )
 
-        result_label.config(text=password)
+        password = result["password"]
+        entropy = result["entropy"]
+        strength = result["strength"]
+
+        result_label.config(text=f"Contraseña: {password}")
+
+        entropy_label.config(text=f"Entropía: {entropy} bits")
+
+        strength_label.config(text=f"Seguridad: {strength}")
 
         if save_var.get():
             FileStorage.save_password(password)
@@ -36,6 +44,8 @@ def start_gui():
 
     global length_entry
     global result_label
+    global entropy_label
+    global strength_label
     global lowercase_var
     global uppercase_var
     global digits_var
@@ -68,5 +78,11 @@ def start_gui():
 
     result_label = tk.Label(root, text="")
     result_label.pack()
+
+    entropy_label = tk.Label(root, text="")
+    entropy_label.pack()
+
+    strength_label = tk.Label(root, text="")
+    strength_label.pack()
 
     root.mainloop()
