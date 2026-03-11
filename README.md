@@ -37,6 +37,15 @@ Interfaz simple desarrollada con **Tkinter** que permite:
 ```
 data/passwords.txt
 ```
+### 🔐 Análisis de seguridad
+
+* Cálculo de entropía criptográfica
+* Indicador de fortaleza de contraseña
+
+  * Débil
+  * Media
+  * Fuerte
+  * Muy fuerte
 
 ---
 
@@ -48,27 +57,25 @@ El proyecto sigue una estructura modular que separa responsabilidades.
 password_generator/
 │
 ├── core/
-│   └── generator.py
-│       # Lógica criptográfica de generación
+│   └── generator.py           # Lógica criptográfica de generación     
 │
 ├── services/
-│   └── password_service.py
-│       # Lógica de negocio para crear contraseñas
+│   └── password_service.py    # Lógica de negocio para crear contraseñas
 │
 ├── storage/
-│   └── file_storage.py
-│       # Gestión del almacenamiento en archivos
+│   └── file_storage.py        # Gestión del almacenamiento en archivos
+│
+├── security/
+│   └── entropy.py             # Lógica patra calcular la entropia de la contraseña
 │
 ├── ui/
-│   └── gui.py
-│       # Interfaz gráfica con Tkinter
+│   └── gui.py                 # Interfaz gráfica con Tkinter
 │
 ├── data/
 │   └── passwords.txt
 │
 ├── venv/ # Entorno virtual 
-├── main.py
-│   # Punto de entrada de la aplicación
+├── main.py                    # Punto de entrada de la aplicación
 │
 └── README.md
 ```
@@ -80,6 +87,7 @@ password_generator/
 | core     | generación criptográfica de contraseñas |
 | services | reglas de negocio                       |
 | storage  | persistencia de datos                   |
+| security | entropía de contraseña                  |
 | ui       | interfaz gráfica                        |
 | main     | inicialización de la aplicación         |
 
@@ -159,8 +167,8 @@ El proyecto continuará evolucionando hacia una herramienta más completa.
 
 ### Seguridad
 
-* [ ] Cálculo de **entropía de contraseña**
-* [ ] Indicador de seguridad (débil / media / fuerte)
+* [x] Cálculo de **entropía de contraseña**
+* [x] Indicador de seguridad (débil / media / fuerte)
 * [ ] Validación contra contraseñas débiles
 * [ ] Generación tipo **passphrase (Diceware)**
 
