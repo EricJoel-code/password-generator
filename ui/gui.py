@@ -3,12 +3,17 @@ from tkinter import messagebox
 
 from services.password_services import PasswordService
 from storage.file_storage import FileStorage
+from utils.clipboard import ClipboardManager
 
+root = None
+current_password = ""
 
 service = PasswordService()
 
 
 def generar():
+
+    global current_password
 
     try:
 
@@ -26,6 +31,8 @@ def generar():
         entropy = result["entropy"]
         strength = result["strength"]
 
+        current_password = password
+
         result_label.config(text=f"Contraseña: {password}")
 
         entropy_label.config(text=f"Entropía: {entropy} bits")
@@ -40,8 +47,21 @@ def generar():
         messagebox.showerror("Error", str(e))
 
 
+def copiar_contraseña():
+
+    global current_password
+
+    if not current_password:
+        messagebox.showwarning("Aviso", "Primero genera una contraseña")
+        return
+
+    ClipboardManager.copy_to_clipboard(root, current_password)
+    messagebox.showinfo("Copiado", "Contraseña copiada al portapapeles")
+
+
 def start_gui():
 
+    global root
     global length_entry
     global result_label
     global entropy_label
@@ -75,6 +95,8 @@ def start_gui():
     tk.Checkbutton(root, text="Guardar contraseña", variable=save_var).pack(anchor="w")
 
     tk.Button(root, text="Generar", command=generar).pack()
+
+    tk.Button(root, text="Copiar contraseña", command=copiar_contraseña).pack()
 
     result_label = tk.Label(root, text="")
     result_label.pack()

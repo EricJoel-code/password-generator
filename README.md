@@ -47,6 +47,11 @@ data/passwords.txt
   * Fuerte
   * Muy fuerte
 
+### 📋 Usabilidad
+
+* Copiar contraseña al portapapeles con un clic
+* Notificación cuando la contraseña ha sido copiada
+
 ---
 
 # 🏗️ Arquitectura del proyecto
@@ -58,6 +63,9 @@ password_generator/
 │
 ├── core/
 │   └── generator.py           # Lógica criptográfica de generación     
+│
+├── utils/
+│   └── clipboard.py           # Gestión del portapapeles
 │
 ├── services/
 │   └── password_service.py    # Lógica de negocio para crear contraseñas
@@ -174,7 +182,7 @@ El proyecto continuará evolucionando hacia una herramienta más completa.
 
 ### Funcionalidades
 
-* [ ] Botón **copiar al portapapeles**
+* [x] Botón **copiar al portapapeles**
 * [ ] Historial de contraseñas generadas
 * [ ] Guardado por **servicio (gmail, github, etc.)**
 * [ ] Exportación segura
