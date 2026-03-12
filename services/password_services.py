@@ -1,5 +1,6 @@
 from core.generator import PasswordGenerator
 from security.entropy import PasswordEntropy
+from core.passphrase_generator import PassphraseGenerator
 
 
 class PasswordService:
@@ -17,3 +18,13 @@ class PasswordService:
         strength = PasswordEntropy.strength_label(entropy)
 
         return {"password": password, "entropy": entropy, "strength": strength}
+
+    def create_passphrase(self, words: int = 4):
+
+        passphrase = PassphraseGenerator.generate(words)
+
+        entropy = PasswordEntropy.calculate_entropy(passphrase)
+
+        strength = PasswordEntropy.strength_label(entropy)
+
+        return {"password": passphrase, "entropy": entropy, "strength": strength}

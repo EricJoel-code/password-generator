@@ -7,6 +7,8 @@ from utils.clipboard import ClipboardManager
 
 root = None
 current_password = ""
+mode_var = None
+words_entry = None
 
 service = PasswordService()
 
@@ -17,15 +19,25 @@ def generar():
 
     try:
 
-        length = int(length_entry.get())
+        mode = mode_var.get()
 
-        result = service.create_password(
-            length,
-            lowercase_var.get(),
-            uppercase_var.get(),
-            digits_var.get(),
-            symbols_var.get(),
-        )
+        if mode == "password":
+
+            length = int(length_entry.get())
+
+            result = service.create_password(
+                length,
+                lowercase_var.get(),
+                uppercase_var.get(),
+                digits_var.get(),
+                symbols_var.get(),
+            )
+
+        else:
+
+            words = int(words_entry.get())
+
+            result = service.create_passphrase(words)
 
         password = result["password"]
         entropy = result["entropy"]
@@ -43,7 +55,6 @@ def generar():
             FileStorage.save_password(password)
 
     except Exception as e:
-
         messagebox.showerror("Error", str(e))
 
 
@@ -62,6 +73,8 @@ def copiar_contraseña():
 def start_gui():
 
     global root
+    global mode_var
+    global words_entry
     global length_entry
     global result_label
     global entropy_label
@@ -80,10 +93,27 @@ def start_gui():
     length_entry = tk.Entry(root)
     length_entry.pack()
 
+    tk.Label(root, text="Número de palabras (passphrase)").pack()
+
+    words_entry = tk.Entry(root)
+    words_entry.insert(0, "4")
+    words_entry.pack()
+
     lowercase_var = tk.BooleanVar(value=True)
     uppercase_var = tk.BooleanVar(value=True)
     digits_var = tk.BooleanVar(value=True)
     symbols_var = tk.BooleanVar(value=False)
+    mode_var = tk.StringVar(value="password")
+
+    tk.Label(root, text="Tipo de generación").pack()
+
+    tk.Radiobutton(
+        root, text="Contraseña aleatoria", variable=mode_var, value="password"
+    ).pack(anchor="w")
+
+    tk.Radiobutton(
+        root, text="Passphrase (Diceware)", variable=mode_var, value="passphrase"
+    ).pack(anchor="w")
 
     tk.Checkbutton(root, text="Minúsculas", variable=lowercase_var).pack(anchor="w")
     tk.Checkbutton(root, text="Mayúsculas", variable=uppercase_var).pack(anchor="w")

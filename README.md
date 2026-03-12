@@ -52,6 +52,16 @@ data/passwords.txt
 * Copiar contraseña al portapapeles con un clic
 * Notificación cuando la contraseña ha sido copiada
 
+### 🔑 Generación de Passphrases
+
+* Generación de passphrases estilo Diceware
+* Uso de palabras aleatorias para mayor memorabilidad
+* Alta entropía con múltiples palabras
+
+Ejemplo:
+```
+rocket-shadow-ocean-dragon
+```
 ---
 
 # 🏗️ Arquitectura del proyecto
@@ -62,22 +72,23 @@ El proyecto sigue una estructura modular que separa responsabilidades.
 password_generator/
 │
 ├── core/
-│   └── generator.py           # Lógica criptográfica de generación     
+│   └── generator.py               # Lógica criptográfica de generación
+│   └── passphrase_generator.py    # Generador de passphrases     
 │
 ├── utils/
-│   └── clipboard.py           # Gestión del portapapeles
+│   └── clipboard.py               # Gestión del portapapeles
 │
 ├── services/
-│   └── password_service.py    # Lógica de negocio para crear contraseñas
+│   └── password_service.py        # Lógica de negocio para crear contraseñas
 │
 ├── storage/
-│   └── file_storage.py        # Gestión del almacenamiento en archivos
+│   └── file_storage.py            # Gestión del almacenamiento en archivos
 │
 ├── security/
-│   └── entropy.py             # Lógica patra calcular la entropia de la contraseña
+│   └── entropy.py                 # Lógica patra calcular la entropia de la contraseña
 │
 ├── ui/
-│   └── gui.py                 # Interfaz gráfica con Tkinter
+│   └── gui.py                     # Interfaz gráfica con Tkinter
 │
 ├── data/
 │   └── passwords.txt
@@ -178,7 +189,7 @@ El proyecto continuará evolucionando hacia una herramienta más completa.
 * [x] Cálculo de **entropía de contraseña**
 * [x] Indicador de seguridad (débil / media / fuerte)
 * [ ] Validación contra contraseñas débiles
-* [ ] Generación tipo **passphrase (Diceware)**
+* [x] Generación tipo **passphrase (Diceware)**
 
 ### Funcionalidades
 
