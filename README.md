@@ -47,6 +47,21 @@ data/passwords.txt
   * Fuerte
   * Muy fuerte
 
+
+### 🛡️ Verificación con datasets reales
+
+  * Compatible con listas grandes como **rockyou.txt**
+  * Manejo de errores de encoding (**latin-1**)
+
+
+### ⚡ Optimización de rendimiento
+
+  * Detección automática de tamaño de archivo
+  * Uso de cache en memoria para archivos pequeños
+  * Búsqueda por streaming para datasets grandes (como rockyou.txt)
+  * Manejo eficiente de memoria
+
+
 ### 📋 Usabilidad
 
 * Copiar contraseña al portapapeles con un clic
@@ -86,12 +101,14 @@ password_generator/
 │
 ├── security/
 │   └── entropy.py                 # Lógica patra calcular la entropia de la contraseña
+│   └── breach_checker.py          # Lógica para leer el archivo rockyou
 │
 ├── ui/
 │   └── gui.py                     # Interfaz gráfica con Tkinter
 │
 ├── data/
 │   └── passwords.txt
+│   └── rockyou.txt                
 │
 ├── venv/ # Entorno virtual 
 ├── main.py                    # Punto de entrada de la aplicación
@@ -180,6 +197,14 @@ nT8@Pq2!kLm3
 
 ---
 
+# Pagina web para descargar el archivo rockyou.txt
+
+```
+https://weakpass.com/wordlists/rockyou.txt
+```
+
+---
+
 # 🛣️ Roadmap (mejoras futuras)
 
 El proyecto continuará evolucionando hacia una herramienta más completa.
@@ -188,8 +213,9 @@ El proyecto continuará evolucionando hacia una herramienta más completa.
 
 * [x] Cálculo de **entropía de contraseña**
 * [x] Indicador de seguridad (débil / media / fuerte)
-* [ ] Validación contra contraseñas débiles
+* [x] Validación contra contraseñas débiles
 * [x] Generación tipo **passphrase (Diceware)**
+* [x] Optimización de búsqueda (streaming vs cache)
 
 ### Funcionalidades
 
@@ -210,12 +236,6 @@ El proyecto continuará evolucionando hacia una herramienta más completa.
 * [ ] Empaquetado como **paquete Python**
 * [ ] Versión CLI (terminal)
 * [ ] Generación de ejecutable con **PyInstaller**
-
-### Versión futura
-
-* [ ] API REST
-* [ ] Aplicación web (Django / FastAPI)
-* [ ] Dashboard de análisis de contraseñas
 
 ---
 

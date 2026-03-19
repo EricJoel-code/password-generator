@@ -42,6 +42,7 @@ def generar():
         password = result["password"]
         entropy = result["entropy"]
         strength = result["strength"]
+        is_weak = result["is_weak"]
 
         current_password = password
 
@@ -50,6 +51,11 @@ def generar():
         entropy_label.config(text=f"Entropía: {entropy} bits")
 
         strength_label.config(text=f"Seguridad: {strength}")
+
+        if is_weak:
+            weak_label.config(text="⚠️ Contraseña común (insegura)")
+        else:
+            weak_label.config(text="✔ No encontrada en lista de rockyou")
 
         if save_var.get():
             FileStorage.save_password(password)
@@ -84,6 +90,7 @@ def start_gui():
     global digits_var
     global symbols_var
     global save_var
+    global weak_label
 
     root = tk.Tk()
     root.title("Password Generator")
@@ -136,5 +143,8 @@ def start_gui():
 
     strength_label = tk.Label(root, text="")
     strength_label.pack()
+
+    weak_label = tk.Label(root, text="")
+    weak_label.pack()
 
     root.mainloop()
